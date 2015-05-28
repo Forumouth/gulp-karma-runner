@@ -55,7 +55,7 @@ g.task "it.server", (done) ->
     karma.server(
       "singleRun": false
       "frameworks": ["mocha", "chai"]
-      "browsers": ["Chrome", "Firefox"]
+      "browsers": ["Firefox"]
       "preprocessors":
         "**/*.coffee": ["coffee"]
       "coffeePreprocessor":
@@ -74,7 +74,7 @@ g.task "it.runner", ->
     karma.runner(
       "singleRun": false
       "frameworks": ["mocha", "chai"]
-      "browsers": ["Chrome", "Firefox"]
+      "browsers": ["Firefox"]
       "preprocessors":
         "**/*.coffee": ["coffee"]
       "coffeePreprocessor":

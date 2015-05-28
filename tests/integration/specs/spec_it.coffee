@@ -21,7 +21,7 @@ describe "Integration tests", ->
           karma.server(
             "singleRun": true
             "frameworks": ["mocha", "chai"]
-            "browsers": ["Chrome", "Firefox"]
+            "browsers": ["Firefox"]
             "preprocessors":
               "**/*.coffee": ["coffee"]
             "coffeePreprocessor":
@@ -42,7 +42,7 @@ describe "Integration tests", ->
           karma.server(
             "singleRun": true
             "frameworks": ["mocha", "chai"]
-            "browsers": ["Chrome", "Firefox"]
+            "browsers": ["Firefox"]
             "preprocessors":
               "**/*.coffee": ["coffee"]
             "coffeePreprocessor":
