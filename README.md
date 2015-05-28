@@ -9,7 +9,7 @@ This is a gulp plugin for [karma](http://karma-runner.github.io/)
 Generally, you can use it by normal approach. i.e. like this:
 
 `gulpfile.js`
-```node_js
+```javascript
 /*global require*/
 (function (require) {
     "use strict";
