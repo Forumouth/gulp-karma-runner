@@ -31,7 +31,7 @@ Generally, you can use it by normal approach. i.e. like this:
 ```
 Note that the options are equivalent to Karma configucation options
 
-## Deal with g.watch
+## Deal with gulp.watch
 Because this plugin provides runner, aka. a wrap of `karma runner`. Therefore,
 you can write 2 tasks and run server task first, then, run runner task with
 watching:
