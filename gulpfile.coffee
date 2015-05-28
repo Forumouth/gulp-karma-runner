@@ -47,7 +47,7 @@ g.task "integration_tests", ["unit_tests"], ->
   ).pipe(
     mocha(
       "reporter": "dot"
-      "timeout": 5000
+      "timeout": 10000
     )
   )
 
