@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.org/Forumouth/gulp-karma-runner.svg?branch=master)](https://travis-ci.org/Forumouth/gulp-karma-runner)
 
+[![NPM](https://nodei.co/npm/gulp-karma-runner.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/gulp-karma-runner/)
+
 ## What this?
 This is a gulp plugin for [karma](http://karma-runner.github.io/)
 
