@@ -1,3 +1,4 @@
 # Gulp plugin for karma
 
-WIP
+## What this?
+This is a gulp plugin for [karma](http://karma-runner.github.io/)
