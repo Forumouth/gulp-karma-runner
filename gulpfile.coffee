@@ -44,7 +44,12 @@ g.task "integration_tests", ["unit_tests"], ->
     linter.reporter("coffeelint-stylish")
   ).pipe(
     linter.reporter("failOnWarning")
-  ).pipe(mocha("reporter": "dot"))
+  ).pipe(
+    mocha(
+      "reporter": "dot"
+      "timeout": 5000
+    )
+  )
 
 g.task "it.server", (done) ->
   karma = require "./src/plugin"
