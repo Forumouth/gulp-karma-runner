@@ -15,4 +15,3 @@ before_script:
 script:
   - "${GULPBIN} gulp-syntax-check"
   - "${GULPBIN} integration_tests"
-  - "killall gulp"
