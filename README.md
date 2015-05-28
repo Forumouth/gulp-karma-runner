@@ -23,12 +23,7 @@ Generally, you can use it by normal approach. i.e. like this:
             karma.server({
                 "singleRun": true,
                 "frameworks": ["mocha", "chai"],
-                "browsers": ["Chrome", "Firefox"],
-                "coffeePreprocessor": {
-                    "options": {
-                        "sourceMap": true
-                    }
-                }
+                "browsers": ["Chrome", "Firefox"]
             })
         );
     });
