@@ -52,6 +52,7 @@ watching:
         ], {"read": false}).pipe(
             karma.server({
                 "singleRun": false,
+                "quiet": true, // quiet mode is important to prevent multiple output
                 "frameworks": ["mocha", "chai"],
                 "browsers": ["Chrome", "Firefox"]
             })
