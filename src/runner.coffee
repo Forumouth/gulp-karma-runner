@@ -1,6 +1,7 @@
 inject = require("node-kissdi").inject
 merge = require "merge"
 t = require "through2"
+gutil = require "gulp-util"
 
 plugin = inject [
   "runner"
@@ -19,7 +20,13 @@ plugin = inject [
           runner.run optionsToPass, (exitCode) =>
             if not exitCode and process.env.testing
               @emit("debug-fin")
-            cb.apply cb, arguments
+            if exitCode
+              cb new gutil.PluginError(
+                "gulp-karma-runner.runner",
+                "Failed Unit Tests!"
+              )
+            else
+              cb()
       )
 ], (
   "runner": require("karma").runner

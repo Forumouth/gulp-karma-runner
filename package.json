@@ -15,6 +15,7 @@
   "author": "Hiroaki Yamamoto <admine@hysoftware.net>",
   "license": "MIT",
   "dependencies": {
+    "gulp-util": "^3.0.4",
     "karma": "^0.12.32",
     "merge": "^1.2.0",
     "node-kissdi": "^1.0.3",

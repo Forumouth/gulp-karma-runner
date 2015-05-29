@@ -1,9 +1,11 @@
 # Test manually for integration tests: there are dedicated tasks:
-# it.server to launch the server
-# it.runner to instruct run the test
+# it.server.success to launch the server
+# it.server.failure to launch the server
+# it.runner to instruct run the test in success case
 karma = require("../../../src/plugin")
 expect = require("chai").expect
 g = require "gulp"
+gutil = require "gulp-util"
 
 describe "Integration tests", ->
   before ->
@@ -51,4 +53,6 @@ describe "Integration tests", ->
           )
         ).on(
           "debug-fin", -> done new Error "The task should throw something."
-        ).on "error", (-> done())
+        ).on "error", (e) ->
+          expect(e).is.instanceof gutil.PluginError
+          done()

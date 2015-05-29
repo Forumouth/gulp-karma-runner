@@ -51,11 +51,30 @@ g.task "integration_tests", ["unit_tests"], ->
     )
   )
 
-g.task "it.server", (done) ->
+g.task "it.server.success", (done) ->
   karma = require "./src/plugin"
   g.src([
     "./tests/integration/data/sample.coffee"
     "./tests/integration/data/success_sample.coffee"
+  ], "read": false).pipe(
+    karma.server(
+      "singleRun": false
+      "frameworks": ["mocha", "chai"]
+      "browsers": ["Firefox"]
+      "preprocessors":
+        "**/*.coffee": ["coffee"]
+      "coffeePreprocessor":
+        "options":
+          "sourceMap": true
+    )
+  )
+  done()
+
+g.task "it.server.failure", (done) ->
+  karma = require "./src/plugin"
+  g.src([
+    "./tests/integration/data/sample.coffee"
+    "./tests/integration/data/failure_sample.coffee"
   ], "read": false).pipe(
     karma.server(
       "singleRun": false
@@ -76,16 +95,9 @@ g.task "it.runner", ->
     "./tests/integration/data/sample.coffee"
     "./tests/integration/data/success_sample.coffee"
   ], "read": false).pipe(
-    karma.runner(
-      "singleRun": false
-      "frameworks": ["mocha", "chai"]
-      "browsers": ["Firefox"]
-      "preprocessors":
-        "**/*.coffee": ["coffee"]
-      "coffeePreprocessor":
-        "options":
-          "sourceMap": true
-    )
+    plumber "errorHandler": notify.onError "<%= error.message %>"
+  ).pipe(
+    karma.runner()
   )
 
 g.task "compile", ["integration_tests"], ->
