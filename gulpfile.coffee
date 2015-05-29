@@ -59,6 +59,7 @@ g.task "it.server.success", (done) ->
   ], "read": false).pipe(
     karma.server(
       "singleRun": false
+      "quiet": true
       "frameworks": ["mocha", "chai"]
       "browsers": ["Firefox"]
       "preprocessors":
@@ -78,8 +79,11 @@ g.task "it.server.failure", (done) ->
   ], "read": false).pipe(
     karma.server(
       "singleRun": false
+      "quiet": true
       "frameworks": ["mocha", "chai"]
       "browsers": ["Firefox"]
+      "client":
+        "captureConsole": false
       "preprocessors":
         "**/*.coffee": ["coffee"]
       "coffeePreprocessor":

@@ -11,6 +11,8 @@ describe "Server unit tests (test mode)", ->
   karmaServer = undefined
   plugin = undefined
   server = undefined
+  exec_ret = undefined
+  exec = undefined
   before ->
     process.env.testing = true
     karmaServer = require "../../../src/server.coffee"
@@ -22,8 +24,19 @@ describe "Server unit tests (test mode)", ->
     server = {
       "start": sinon.stub().callsArg 1
     }
+    exec_ret =
+      "stdout":
+        "pipe": sinon.spy()
+      "stderr":
+        "pipe": sinon.spy()
+      "stdin":
+        "write": sinon.spy()
+        "end": sinon.spy()
+      "on": sinon.spy()
+    exec = sinon.stub().returns exec_ret
     plugin = karmaServer.invoke(
       "server": server
+      "exec": exec
     )
 
   describe "Calling plugin without any options", ->
@@ -67,6 +80,33 @@ describe "Server unit tests (test mode)", ->
             ).is.ok
             done()
         ).on "error", done
+
+      describe "options.quiet is passed", ->
+        it "exec should be called with proper arguments", (done) ->
+          gulp.src(
+            "./tests/unit/data/**/*.coffee"
+            "read": false
+          ).pipe(
+            plugin(
+              "files": ["**/*.coffee"]
+              "quiet": true
+            )
+          ).on("debug-fin",
+            ->
+              expect(exec.calledWith [
+                "node"
+                path.resolve "./src", "../bin/server.js"
+              ].join " ").is.ok
+              expect(
+                exec_ret.stdin.write.calledWith(
+                  JSON.stringify("files": ["**/*.coffee"])
+                )
+              ).is.ok
+              expect(
+                exec_ret.stdin.end.called
+              ).is.ok
+              done()
+          ).on "error", done
 
       it "Other option should be passed", (done) ->
         browsers = ["Chrome", "Firefox", "PhantomJS"]
