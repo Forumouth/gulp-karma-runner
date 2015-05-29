@@ -33,6 +33,7 @@ describe "Server unit tests (test mode)", ->
         "write": sinon.spy()
         "end": sinon.spy()
       "on": sinon.spy()
+      "kill": sinon.spy()
     exec = sinon.stub().returns exec_ret
     plugin = karmaServer.invoke(
       "server": server
