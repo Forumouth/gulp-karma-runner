@@ -1,11 +1,11 @@
 {
   "name": "gulp-karma-runner",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Gulp plugin for karma",
   "main": "lib/plugin.js",
   "repository": {
     "type": "git",
-    "url": "Secret"
+    "url": "https://github.com/Forumouth/gulp-karma-runner.git"
   },
   "keywords": [
     "gulpplugin",
