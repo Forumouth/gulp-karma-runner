@@ -19,7 +19,6 @@
     "karma": "^0.12.32",
     "merge": "^1.2.0",
     "node-kissdi": "^1.0.3",
-    "q": "^1.4.1",
     "through2": "^0.6.5"
   },
   "devDependencies": {
@@ -39,6 +38,7 @@
     "karma-firefox-launcher": "^0.1.6",
     "karma-mocha": "^0.1.10",
     "mocha": "^2.2.5",
+    "q": "^1.4.1",
     "sinon": "^1.14.1"
   }
 }
