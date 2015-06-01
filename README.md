@@ -45,7 +45,7 @@ watching:
     "use strict";
     var g = require("gulp"),
         karma = require("gulp-karma-runner");
-    g.task("server", function () {
+    g.task("server", function (done) {
         g.src([
             "src/**/*.js",
             "test/**/*.js"
@@ -57,6 +57,7 @@ watching:
                 "browsers": ["Chrome", "Firefox"]
             })
         );
+        done();
     });
     g.task("runner", function () {
         g.src([
