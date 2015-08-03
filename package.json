@@ -16,7 +16,7 @@
   "license": "MIT",
   "dependencies": {
     "gulp-util": "^3.0.4",
-    "karma": "^0.12.32",
+    "karma": "^0.13.0",
     "merge": "^1.2.0",
     "node-kissdi": "^1.0.3",
     "through2": "^0.6.5"

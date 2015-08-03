@@ -5,9 +5,9 @@ gutil = require "gulp-util"
 path = require "path"
 
 plugin = inject [
-  "server"
+  "Server"
   "exec"
-  (server, exec) ->
+  (Server, exec) ->
     (options) ->
       paths = []
       through.obj(
@@ -37,7 +37,7 @@ plugin = inject [
             cb()
           else
             delete optionsToPass.quiet
-            server.start optionsToPass, (
+            server = new Server optionsToPass, (
               (exitCode) =>
                 if not exitCode and process.env.testing
                   @emit("debug-fin")
@@ -49,9 +49,10 @@ plugin = inject [
                 else
                   cb()
             )
+            server.start()
       )
 ], {
-  "server": require("karma").server
+  "Server": require("karma").Server
   "exec": require("child_process").exec
 }
 

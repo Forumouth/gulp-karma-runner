@@ -10,9 +10,10 @@ through = require "through2"
 describe "Server unit tests (test mode)", ->
   karmaServer = undefined
   plugin = undefined
-  server = undefined
   exec_ret = undefined
   exec = undefined
+  server_options = undefined
+  server_start = undefined
   before ->
     process.env.testing = true
     karmaServer = require "../../../src/server.coffee"
@@ -21,9 +22,14 @@ describe "Server unit tests (test mode)", ->
     delete process.env.testing
 
   beforeEach ->
-    server = {
-      "start": sinon.stub().callsArg 1
-    }
+    server_options = undefined
+    server_start = sinon.stub().callsArg(0)
+
+    class Server
+      constructor: (option, @callback) ->
+        server_options = option
+      start: -> server_start @callback
+
     exec_ret =
       "stdout":
         "pipe": sinon.spy()
@@ -36,7 +42,7 @@ describe "Server unit tests (test mode)", ->
       "kill": sinon.spy()
     exec = sinon.stub().returns exec_ret
     plugin = karmaServer.invoke(
-      "server": server
+      "Server": Server
       "exec": exec
     )
 
@@ -58,10 +64,8 @@ describe "Server unit tests (test mode)", ->
             (files) ->
               absoluteFiles = files.map (file) ->
                 path.resolve process.cwd(), file
-              expect(server.start.callCount).equal 1
-              expect(
-                server.start.calledWith "files": absoluteFiles
-              ).is.ok
+              expect(server_start.callCount).equal 1
+              expect(server_options).is.eql "files": absoluteFiles
           ).done (-> done()), done
       ).once "error", done
 
@@ -75,10 +79,8 @@ describe "Server unit tests (test mode)", ->
           plugin "files": ["**/*.coffee"]
         ).on("debug-fin",
           ->
-            expect(server.start.callCount).equal 1
-            expect(
-              server.start.calledWith "files": ["**/*.coffee"]
-            ).is.ok
+            expect(server_start.callCount).equal 1
+            expect(server_options).is.eql "files": ["**/*.coffee"]
             done()
         ).on "error", done
 
@@ -121,19 +123,17 @@ describe "Server unit tests (test mode)", ->
           )
         ).on("debug-fin",
           ->
-            expect(server.start.callCount).equal 1
-            expect(
-              server.start.calledWith(
-                "files": [
-                  path.resolve(
-                    process.cwd(),
-                    "./tests/unit/data/dummy1.coffee"
-                  )
-                ]
-                "browsers": browsers
-                "colors": true
-              )
-            ).is.ok
+            expect(server_start.callCount).equal 1
+            expect(server_options).is.eql (
+              "files": [
+                path.resolve(
+                  process.cwd(),
+                  "./tests/unit/data/dummy1.coffee"
+                )
+              ]
+              "browsers": browsers
+              "colors": true
+            )
             done()
         ).on "error", done
 
