@@ -8,8 +8,8 @@
         config.push(p.stdin.read());
     });
     p.stdin.on("end", function () {
-        var server = new Server(config);
         config = JSON.parse(config.join(""));
+        var server = new Server(config);
         server.start();
     });
 }(require, process));
