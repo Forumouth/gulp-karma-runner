@@ -33,6 +33,7 @@ describe "Server unit tests (test mode)", ->
     exec_ret =
       "stdout":
         "pipe": sinon.spy()
+        "on": sinon.spy()
       "stderr":
         "pipe": sinon.spy()
       "stdin":

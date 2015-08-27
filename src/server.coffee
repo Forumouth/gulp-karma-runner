@@ -28,6 +28,9 @@ plugin = inject [
             background.on "error", (e) =>
               @emit "error", new gutil.PluginError "Fails Unit testing"
             background.stderr.pipe process.stderr
+            background.stdout.on "readable", ->
+              # Drain output from stdout
+              background.stdount.read()
             background.stdin.write JSON.stringify optionsToPass
             background.stdin.end()
             process.on "exit", ->
