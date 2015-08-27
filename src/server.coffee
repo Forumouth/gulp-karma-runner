@@ -21,13 +21,11 @@ plugin = inject [
           optionsToPass = merge default_options, options
           if optionsToPass.quiet
             delete optionsToPass.quiet
-            background = exec([
-              "node"
-              path.resolve __dirname, "../bin/server.js"
-            ].join " ")
+            background = exec "node", [
+              path.resolve(__dirname, "../bin/server.js")
+            ], ("stdio": ["pipe", "ignore", process.stderr])
             background.on "error", (e) =>
               @emit "error", new gutil.PluginError "Fails Unit testing"
-            background.stderr.pipe process.stderr
             background.stdin.write JSON.stringify optionsToPass
             background.stdin.end()
             process.on "exit", ->
@@ -53,7 +51,7 @@ plugin = inject [
       )
 ], {
   "Server": require("karma").Server
-  "exec": require("child_process").exec
+  "exec": require("child_process").spawn
 }
 
 module.exports = plugin

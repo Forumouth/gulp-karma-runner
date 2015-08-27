@@ -96,18 +96,15 @@ describe "Server unit tests (test mode)", ->
             )
           ).on("debug-fin",
             ->
-              expect(exec.calledWith [
-                "node"
-                path.resolve "./src", "../bin/server.js"
-              ].join " ").is.ok
+              expect(exec.calledWith "node", [
+                path.resolve("./src", "../bin/server.js")
+              ], ("stdio": ["pipe", "ignore", process.stderr])).is.true
               expect(
                 exec_ret.stdin.write.calledWith(
                   JSON.stringify("files": ["**/*.coffee"])
                 )
-              ).is.ok
-              expect(
-                exec_ret.stdin.end.called
-              ).is.ok
+              ).is.true
+              expect(exec_ret.stdin.end.called).is.true
               done()
           ).on "error", done
 
