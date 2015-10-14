@@ -33,7 +33,7 @@ deploy:
     skip_cleanup: true
     on:
       tags: true
-      repo: Forumouth/gulp-scss
+      repo: Forumouth/gulp-karma-runner
   - provider: npm
     email: hiroaki@hysoftware.net
     skip_cleanup: true
@@ -41,4 +41,4 @@ deploy:
       secure: ${NPM_RELEASE_API_KEY}
     on:
       tags: true
-      repo: Forumouth/gulp-scss
+      repo: Forumouth/gulp-karma-runner
