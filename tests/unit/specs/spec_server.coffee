@@ -16,9 +16,9 @@ describe "Server unit tests (test mode)", ->
   server_start = undefined
   before ->
     process.env.testing = true
-    karmaServer = require "../../../src/server.coffee"
+    karmaServer = require "../../../src/lib/server.coffee"
   after ->
-    delete require.cache[require.resolve "../../../src/server.coffee"]
+    delete require.cache[require.resolve "../../../src/lib/server.coffee"]
     delete process.env.testing
 
   beforeEach ->
@@ -97,7 +97,7 @@ describe "Server unit tests (test mode)", ->
           ).on("debug-fin",
             ->
               expect(exec.calledWith "node", [
-                path.resolve("./src", "../bin/server.js")
+                path.resolve("./src/lib", "../bin/server.js")
               ], ("stdio": ["pipe", "ignore", process.stderr])).is.true
               expect(
                 exec_ret.stdin.write.calledWith(
@@ -137,9 +137,9 @@ describe "Server unit tests (test mode)", ->
 describe "Server unit tests (non-test mode)", ->
   karma = undefined
   before ->
-    karma = require "../../../src/server.coffee"
+    karma = require "../../../src/lib/server.coffee"
   after ->
-    delete require.cache[require.resolve "../../../src/server.coffee"]
+    delete require.cache[require.resolve "../../../src/lib/server.coffee"]
 
   it "The exported function shouldn't be injectable", ->
     expect(karma.invoke).is.undefined

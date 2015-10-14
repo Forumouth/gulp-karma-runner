@@ -14,10 +14,10 @@ describe "Runner unit tests (testing mode)", ->
 
   before ->
     process.env.testing = true
-    injectableFunc = require("../../../src/runner.coffee")
+    injectableFunc = require("../../../src/lib/runner.coffee")
 
   after ->
-    delete require.cache[require.resolve "../../../src/runner.coffee"]
+    delete require.cache[require.resolve "../../../src/lib/runner.coffee"]
     delete process.env.testing
 
   beforeEach ->
@@ -66,10 +66,10 @@ describe "Runner unit tests (non-testing mode)", ->
   func = undefined
 
   before ->
-    func = require("../../../src/runner.coffee")
+    func = require("../../../src/lib/runner.coffee")
 
   after ->
-    delete require.cache[require.resolve "../../../src/runner.coffee"]
+    delete require.cache[require.resolve "../../../src/lib/runner.coffee"]
 
   it "The exported function shouldn't be injectable", ->
     expect(func.invoke).is.undefined

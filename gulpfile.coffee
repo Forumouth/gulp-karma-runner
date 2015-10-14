@@ -7,6 +7,21 @@ compiler = require "gulp-coffee"
 
 mocha = require "gulp-mocha"
 
+g.task "compile.bin", ->
+  g.src(
+    "./src/bin/**/*.coffee"
+  ).pipe(
+    plumber "errorHandler": notify.onError "<%= error.message %>"
+  ).pipe(
+    linter("./coffeelint.json")
+  ).pipe(
+    linter.reporter("coffeelint-stylish")
+  ).pipe(
+    linter.reporter("failOnWarning")
+  ).pipe(
+    compiler()
+  ).pipe g.dest "./bin"
+
 g.task "gulp-syntax-check", ->
   g.src(
     "./gulpfile.coffee"
@@ -51,8 +66,8 @@ g.task "integration_tests", ["unit_tests"], ->
     )
   )
 
-g.task "it.server.success", (done) ->
-  karma = require "./src/plugin"
+g.task "it.server.success", ["compile.bin"], (done) ->
+  karma = require "./src/lib/plugin"
   g.src([
     "./tests/integration/data/sample.coffee"
     "./tests/integration/data/success_sample.coffee"
@@ -71,8 +86,8 @@ g.task "it.server.success", (done) ->
   )
   done()
 
-g.task "it.server.failure", (done) ->
-  karma = require "./src/plugin"
+g.task "it.server.failure", ["compile.bin"], (done) ->
+  karma = require "./src/lib/plugin"
   g.src([
     "./tests/integration/data/sample.coffee"
     "./tests/integration/data/failure_sample.coffee"
@@ -94,7 +109,7 @@ g.task "it.server.failure", (done) ->
   done()
 
 g.task "it.runner", ->
-  karma = require "./src/plugin"
+  karma = require "./src/lib/plugin"
   g.src([
     "./tests/integration/data/sample.coffee"
     "./tests/integration/data/success_sample.coffee"
@@ -104,9 +119,9 @@ g.task "it.runner", ->
     karma.runner()
   )
 
-g.task "compile", ["integration_tests"], ->
+g.task "compile.lib", ["integration_tests"], ->
   g.src(
-    "./src/**/*.coffee"
+    "./src/lib/**/*.coffee"
   ).pipe(
     plumber "errorHandler": notify.onError "<%= error.message %>"
   ).pipe(
@@ -118,6 +133,8 @@ g.task "compile", ["integration_tests"], ->
   ).pipe(
     compiler()
   ).pipe g.dest "./lib"
+
+g.task "compile", ["compile.bin", "compile.lib"], ->
 
 g.task "default", ->
   g.watch "./gulpfile.coffee", ["gulp-syntax-check"]

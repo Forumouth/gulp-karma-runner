@@ -2,7 +2,7 @@
 # it.server.success to launch the server
 # it.server.failure to launch the server
 # it.runner to instruct run the test in success case
-karma = require("../../../src/plugin")
+karma = require("../../../src/lib/plugin")
 expect = require("chai").expect
 g = require "gulp"
 gutil = require "gulp-util"
@@ -12,7 +12,7 @@ describe "Integration tests", ->
     process.env.testing = true
   after ->
     delete process.env.testing
-    delete require.cache[require.resolve "../../../src/plugin"]
+    delete require.cache[require.resolve "../../../src/lib/plugin"]
   describe "Success sample case", ->
     describe "Standalone mode", ->
       it "Should success the tests", (done) ->

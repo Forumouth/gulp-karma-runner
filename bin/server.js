@@ -1,15 +1,19 @@
-/*global require, process*/
-(function (r, p) {
-    "use strict";
-    var Server = r("karma").Server,
-        config = [];
+(function() {
+  var Server, config;
 
-    p.stdin.on("readable", function () {
-        config.push(p.stdin.read());
-    });
-    p.stdin.on("end", function () {
-        config = JSON.parse(config.join(""));
-        var server = new Server(config);
-        server.start();
-    });
-}(require, process));
+  Server = require("karma").Server;
+
+  config = [];
+
+  process.stdin.on("readable", function() {
+    return config.push(process.stdin.read());
+  });
+
+  process.stdin.on("end", function() {
+    var server;
+    config = JSON.parse(config.join(""));
+    server = new Server(config);
+    return server.start();
+  });
+
+}).call(this);

@@ -21,8 +21,15 @@ plugin = inject [
           optionsToPass = merge default_options, options
           if optionsToPass.quiet
             delete optionsToPass.quiet
+            filePath = path.resolve(
+              __dirname,
+              if process.env.mode is "testing"
+                "../../bin/server.js"
+              else
+                "../bin/server.js"
+            )
             background = exec "node", [
-              path.resolve(__dirname, "../bin/server.js")
+              filePath
             ], ("stdio": ["pipe", "ignore", process.stderr])
             background.on "error", (e) =>
               @emit "error", new gutil.PluginError "Fails Unit testing"
