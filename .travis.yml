@@ -9,9 +9,36 @@ before_install:
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
 
-before_script:
-  - export GULPBIN=./node_modules/gulp/bin/gulp.js
+env:
+  - GULPBIN=./node_modules/gulp/bin/gulp.js
 
 script:
   - "${GULPBIN} gulp-syntax-check"
   - "${GULPBIN} integration_tests"
+
+before_deploy:
+  - ${GULPBIN} compile
+  - sed -i -e "/lib\//D" .gitignore
+  - git config --global user.email "test@example.com"
+  - git config --global user.name "Mr. Travis CI"
+  - git add .
+  - git commit -m "Commit to make tarball"
+  - git archive --format=tar.gz HEAD > ./${TRAVIS_TAG}-compiled.tar.gz
+
+deploy:
+  - provider: releases
+    api_key:
+      secure: ${GITHUB_RELEASE_API_KEY}
+    file: "${TRAVIS_TAG}-compiled.tar.gz"
+    skip_cleanup: true
+    on:
+      tags: true
+      repo: Forumouth/gulp-scss
+  - provider: npm
+    email: hiroaki@hysoftware.net
+    skip_cleanup: true
+    api_key:
+      secure: ${NPM_RELEASE_API_KEY}
+    on:
+      tags: true
+      repo: Forumouth/gulp-scss
