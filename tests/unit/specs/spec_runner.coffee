@@ -11,6 +11,7 @@ describe "Runner unit tests (testing mode)", ->
   injectableFunc = undefined
   plugin = undefined
   runner = undefined
+  fakePath = undefined
 
   before ->
     process.env.testing = true
@@ -23,7 +24,12 @@ describe "Runner unit tests (testing mode)", ->
   beforeEach ->
     runner =
       "run": sinon.stub().callsArg 1
-    plugin = injectableFunc.invoke "runner": runner
+    fakePath =
+      "resolve": sinon.stub().returns "called"
+    plugin = injectableFunc.invoke(
+      "runner": runner,
+      "path": fakePath
+    )
 
   describe "Without any options", ->
     it "plugin should be called with options with files parameter", (done) ->
@@ -41,9 +47,7 @@ describe "Runner unit tests (testing mode)", ->
             absolutePaths = relativePaths.map (relativePath) ->
               path.resolve process.cwd(), relativePath
             expect(runner.run.callCount).equal 1
-            expect(
-              runner.run.calledWith "files": absolutePaths
-            ).is.ok
+            expect(runner.run.calledWith "files": absolutePaths).is.true
         ).done (-> done()), done
       ).once "error", done
 
@@ -53,12 +57,21 @@ describe "Runner unit tests (testing mode)", ->
         gulp.src(
           "./tests/unit/data/**/*.coffee"
         ).pipe(
-          plugin("files": ["./tests/unit/data/**/*.coffee"])
+          plugin(
+            "files": ["./tests/unit/data/**/*.coffee"],
+            "configFile": "karma.conf.js"
+          )
         ).on("debug-fin", ->
           expect(runner.run.callCount).equal 1
           expect(
-            runner.run.calledWith "files": ["./tests/unit/data/**/*.coffee"]
+            runner.run.calledWith(
+              (
+                "files": ["./tests/unit/data/**/*.coffee"],
+                "configFile": fakePath.resolve.returnValues[0]
+              )
+            )
           ).is.ok
+          expect(fakePath.resolve.calledOnce).is.true
           done()
         ).on "error", done
 

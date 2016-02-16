@@ -4,8 +4,9 @@ t = require "through2"
 gutil = require "gulp-util"
 
 plugin = inject [
-  "runner"
-  (runner) ->
+  "runner",
+  "path"
+  (runner, path) ->
     (options) ->
       paths = []
       t.obj(
@@ -17,6 +18,8 @@ plugin = inject [
           defaultOptions =
             "files": paths
           optionsToPass = merge defaultOptions, options
+          if optionsToPass.configFile
+            optionsToPass.configFile = path.resolve optionsToPass.configFile
           runner.run optionsToPass, (exitCode) =>
             if not exitCode and process.env.testing
               @emit("debug-fin")
@@ -29,7 +32,8 @@ plugin = inject [
               cb()
       )
 ], (
-  "runner": require("karma").runner
+  "runner": require("karma").runner,
+  "path": require("path")
 )
 
 module.exports = plugin
