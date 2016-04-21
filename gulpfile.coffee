@@ -66,6 +66,19 @@ g.task "integration_tests", ["unit_tests"], ->
     )
   )
 
+karmaPlugins = [
+  "karma-coffee-preprocessor"
+  "karma-chrome-launcher"
+  "karma-firefox-launcher"
+  "karma-phantomjs-launcher"
+  "karma-mocha"
+  "karma-chai"
+]
+browsers = ["PhantomJS"]
+try
+  browsers = process.env.browsers.split(/\, */g)
+catch
+
 g.task "it.server.success", ["compile.bin"], (done) ->
   karma = require "./src/lib/plugin"
   g.src([
@@ -76,12 +89,13 @@ g.task "it.server.success", ["compile.bin"], (done) ->
       "singleRun": false
       "quiet": true
       "frameworks": ["mocha", "chai"]
-      "browsers": ["Firefox"]
+      "browsers": browsers
       "preprocessors":
         "**/*.coffee": ["coffee"]
       "coffeePreprocessor":
         "options":
           "sourceMap": true
+      "plugins": karmaPlugins
     )
   )
   done()
@@ -96,7 +110,7 @@ g.task "it.server.failure", ["compile.bin"], (done) ->
       "singleRun": false
       "quiet": true
       "frameworks": ["mocha", "chai"]
-      "browsers": ["Firefox"]
+      "browsers": browsers
       "client":
         "captureConsole": false
       "preprocessors":
@@ -104,6 +118,7 @@ g.task "it.server.failure", ["compile.bin"], (done) ->
       "coffeePreprocessor":
         "options":
           "sourceMap": true
+      "plugins": karmaPlugins
     )
   )
   done()
