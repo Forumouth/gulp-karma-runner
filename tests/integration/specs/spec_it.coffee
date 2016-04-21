@@ -7,6 +7,20 @@ expect = require("chai").expect
 g = require "gulp"
 gutil = require "gulp-util"
 
+karmaPlugins = [
+  "karma-coffee-preprocessor"
+  "karma-chrome-launcher"
+  "karma-firefox-launcher"
+  "karma-phantomjs-launcher"
+  "karma-mocha"
+  "karma-chai"
+]
+
+browsers = ["PhantomJS"]
+try
+  browsers = process.env.browsers.split(/\, */g)
+catch
+
 describe "Integration tests", ->
   before ->
     process.env.testing = true
@@ -23,12 +37,13 @@ describe "Integration tests", ->
           karma.server(
             "singleRun": true
             "frameworks": ["mocha", "chai"]
-            "browsers": ["Firefox"]
+            "browsers": browsers
             "preprocessors":
               "**/*.coffee": ["coffee"]
             "coffeePreprocessor":
               "options":
                 "sourceMap": true
+            "plugins": karmaPlugins
           )
         ).on(
           "debug-fin", -> done()
@@ -44,12 +59,13 @@ describe "Integration tests", ->
           karma.server(
             "singleRun": true
             "frameworks": ["mocha", "chai"]
-            "browsers": ["Firefox"]
+            "browsers": browsers
             "preprocessors":
               "**/*.coffee": ["coffee"]
             "coffeePreprocessor":
               "options":
                 "sourceMap": true
+            "plugins": karmaPlugins
           )
         ).on(
           "debug-fin", -> done new Error "The task should throw something."
