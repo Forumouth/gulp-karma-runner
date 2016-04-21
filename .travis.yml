@@ -19,6 +19,7 @@ addons:
 cache:
   directories:
     - node_modules
+    - .nvm
   apt: true
 before_install:
   - "export DISPLAY=:99.0"
