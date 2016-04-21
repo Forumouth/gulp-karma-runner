@@ -9,13 +9,6 @@ before_install:
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
 
-env:
-  - GULPBIN=./node_modules/gulp/bin/gulp.js
-
-script:
-  - "${GULPBIN} gulp-syntax-check"
-  - "${GULPBIN} integration_tests"
-
 before_deploy:
   - ${GULPBIN} compile
   - sed -i -e "/lib\//D" .gitignore
@@ -28,7 +21,17 @@ before_deploy:
 deploy:
   - provider: releases
     api_key:
-      secure: "NPfYWUWoOu+pqkGZXvdmKg2pxqwCahtJs87Ifv7Exs2rbgbpUA7GcfexXymPQUfje+KmrcYd13FO1t0DqiaZRnOhNbCATr5NFvzWc+iHeDMWo6xwyaclI4yRhnGDAbuz0BRuGenSPd/yx+JigvjU908QFUSXCn0j8vNE7PpC3WlVIOHx9thNK+ctdiJ7nN1sIdOFmMWCOGfqgjdp/ENCU/VgnTrisEHjUzTMlqh9eOg1UvBHTW48EfQ2CvIroTZ0PLWFUNLuW9NyAF4MxX8ESWKLeS7QbR9utaFa4q3VhN9o4DGHabAzBOo2GnHhq1xgjhZx3wTlaNrf7kPetsiWTBP7ampHgoWHCrzn/CLU4ZCteDuEf7k656dPMfMK5IFczm7+35USv57Scmd7ZWu/4k5wyqkEmnTf+js0NBlYT2gLk3NzYs0oDCjNYSPz8dxkwujx2fA21xGZWKCp4oyn4P33ffG3dlRwpjKDWH3LdmyopjdZ9vP9bplOcmRKubzEE479IICPJYtDhoKmm9PIvZ5ojufRPKBULAFrrjp96/tsjvosIsOYb4dh6B14mOHkA4r2jdOrqIm9t7r/XXoH04YVkDE+d4QbMAkK4Juv45iaxsl5//qp3OdV3vyKxSKLy27ojXmmmjb/Fn9nZK36oVmFVtXZTHmjNuI7IIiVo44="
+      secure: >-
+        NPfYWUWoOu+pqkGZXvdmKg2pxqwCahtJs87Ifv7Exs2rbgbpUA7GcfexXymPQUfje+Kmrc
+        Yd13FO1t0DqiaZRnOhNbCATr5NFvzWc+iHeDMWo6xwyaclI4yRhnGDAbuz0BRuGenSPd/y
+        x+JigvjU908QFUSXCn0j8vNE7PpC3WlVIOHx9thNK+ctdiJ7nN1sIdOFmMWCOGfqgjdp/E
+        NCU/VgnTrisEHjUzTMlqh9eOg1UvBHTW48EfQ2CvIroTZ0PLWFUNLuW9NyAF4MxX8ESWKL
+        eS7QbR9utaFa4q3VhN9o4DGHabAzBOo2GnHhq1xgjhZx3wTlaNrf7kPetsiWTBP7ampHgo
+        WHCrzn/CLU4ZCteDuEf7k656dPMfMK5IFczm7+35USv57Scmd7ZWu/4k5wyqkEmnTf+js0
+        NBlYT2gLk3NzYs0oDCjNYSPz8dxkwujx2fA21xGZWKCp4oyn4P33ffG3dlRwpjKDWH3Ldm
+        yopjdZ9vP9bplOcmRKubzEE479IICPJYtDhoKmm9PIvZ5ojufRPKBULAFrrjp96/tsjvos
+        IsOYb4dh6B14mOHkA4r2jdOrqIm9t7r/XXoH04YVkDE+d4QbMAkK4Juv45iaxsl5//qp3O
+        dV3vyKxSKLy27ojXmmmjb/Fn9nZK36oVmFVtXZTHmjNuI7IIiVo44=
     file: "${TRAVIS_TAG}-compiled.tar.gz"
     skip_cleanup: true
     on:
@@ -38,7 +41,17 @@ deploy:
     email: hiroaki@hysoftware.net
     skip_cleanup: true
     api_key:
-      secure: "WyKYR2H/hAD+bNWCj7fnZ29PnUEMfsgPS/zoJuYN1GVxNjFaAqmpAk3/V3TRp3WpX7glJSjTTLVmBbjD4xxQS8YsDu39IbeYk5W4TgYXs0OQEL7o6XFAJ224/UbO5s1rf3TVChQOWmUC1QAg1OS5ZliEynCRA8balY3EHsd8Obtm6n0kNLaTP5tEyoggCNTPgion3RpdQsyVl98Gx9jTBZfr5+InqaNc+4xj4Db0+vlyxm428mIH8SRgt1cS7pljMpd4CzGgCeYWCOhA4Lnw8Gdf4J7s9rdq0dja4pCH1Oa3D0jILARRl6m5AtEGQ/8y0ehCZnJYTy/V/Sd7Uh7ec2HvKkVlefiOrkMkb7RCQ0ST9m5/YueVu0GVPzHJH6m6vlXJXxX484ucBFDxDObjxaFQMPOCnhX5Lgwcr393XUBT7lVdqPhHXB0RmJun46x8ptBF1ndDe58olRob4FW0fUZnVpXV5buOOn62m7kaja3uD7ZITO8inzCxe7I6CB4fywZ8mzFwOKQO9I1ELjRPn36KPKbGZfxTxxS2LxrcUOdfY5SOO5pYuN5wsy8PRPFUaB/xpQchrXQJ+5bdsI3mXt4DxiZCGNy98WyDdI0+XwxwSCE+HjD5ughvUqL3Ps9uDPOyChp4Bt41MOg2DmQP8nB3WOBT8OAQI6SaDIFiS4U="
+      secure: >-
+        WyKYR2H/hAD+bNWCj7fnZ29PnUEMfsgPS/zoJuYN1GVxNjFaAqmpAk3/V3TRp3WpX7glJS
+        jTTLVmBbjD4xxQS8YsDu39IbeYk5W4TgYXs0OQEL7o6XFAJ224/UbO5s1rf3TVChQOWmUC
+        1QAg1OS5ZliEynCRA8balY3EHsd8Obtm6n0kNLaTP5tEyoggCNTPgion3RpdQsyVl98Gx9
+        jTBZfr5+InqaNc+4xj4Db0+vlyxm428mIH8SRgt1cS7pljMpd4CzGgCeYWCOhA4Lnw8Gdf
+        4J7s9rdq0dja4pCH1Oa3D0jILARRl6m5AtEGQ/8y0ehCZnJYTy/V/Sd7Uh7ec2HvKkVlef
+        iOrkMkb7RCQ0ST9m5/YueVu0GVPzHJH6m6vlXJXxX484ucBFDxDObjxaFQMPOCnhX5Lgwc
+        r393XUBT7lVdqPhHXB0RmJun46x8ptBF1ndDe58olRob4FW0fUZnVpXV5buOOn62m7kaja
+        3uD7ZITO8inzCxe7I6CB4fywZ8mzFwOKQO9I1ELjRPn36KPKbGZfxTxxS2LxrcUOdfY5SO
+        O5pYuN5wsy8PRPFUaB/xpQchrXQJ+5bdsI3mXt4DxiZCGNy98WyDdI0+XwxwSCE+HjD5ug
+        hvUqL3Ps9uDPOyChp4Bt41MOg2DmQP8nB3WOBT8OAQI6SaDIFiS4U=
     on:
       tags: true
       repo: Forumouth/gulp-karma-runner

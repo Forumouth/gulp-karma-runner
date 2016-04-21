@@ -19,6 +19,8 @@ plugin = inject [
           default_options =
             "files": paths
           optionsToPass = merge default_options, options
+          if optionsToPass.configFile
+            optionsToPass.configFile = path.resolve optionsToPass.configFile
           if optionsToPass.quiet
             delete optionsToPass.quiet
             filePath = path.resolve(
