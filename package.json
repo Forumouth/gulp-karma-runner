@@ -15,9 +15,9 @@
   "author": "Hiroaki Yamamoto <hiroaki@hysoftware.net>",
   "license": "MIT",
   "scripts": {
-    "syntaxCheck": "$(npm bin)/gulp.js gulp-syntax-check",
-    "integrationTest": "$(npm bin)/gulp.js integration_tests",
-    "test": "npm run syntaxCheck && integrationTest",
+    "syntaxCheck": "$(npm bin)/gulp gulp-syntax-check",
+    "integrationTest": "$(npm bin)/gulp integration_tests",
+    "test": "npm run syntaxCheck && npm run integrationTest",
     "ncu": "$(npm bin)/ncu"
   },
   "dependencies": {
