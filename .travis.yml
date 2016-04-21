@@ -25,7 +25,7 @@ before_install:
   - "sh -e /etc/init.d/xvfb start"
 
 before_deploy:
-  - ${GULPBIN} compile
+  - $(npm bin)/gulp compile
   - sed -i -e "/lib\//D" .gitignore
   - git config --global user.email "test@example.com"
   - git config --global user.name "Mr. Travis CI"
