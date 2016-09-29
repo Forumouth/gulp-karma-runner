@@ -1,6 +1,6 @@
 {
   "name": "gulp-karma-runner",
-  "version": "1.1.11",
+  "version": "1.2.0",
   "description": "Gulp plugin for karma",
   "main": "lib/plugin.js",
   "repository": {
@@ -21,33 +21,33 @@
     "ncu": "$(npm bin)/ncu"
   },
   "dependencies": {
-    "gulp-util": "^3.0.4",
-    "karma": "^0.13.0",
+    "gulp-util": "^3.0.7",
+    "karma": "^1.3.0",
     "merge": "^1.2.0",
     "node-kissdi": "^1.0.3",
-    "through2": "^2.0.0"
+    "through2": "^2.0.1"
   },
   "devDependencies": {
-    "chai": "^3.2.0",
-    "coffee-script": "^1.9.2",
+    "chai": "^3.5.0",
+    "coffee-script": "^1.11.0",
     "coffeelint-stylish": "^0.1.2",
-    "glob": "^7.0.0",
-    "gulp": "^3.8.11",
-    "gulp-coffee": "^2.3.1",
+    "glob": "^7.1.0",
+    "gulp": "^3.9.1",
+    "gulp-coffee": "^2.3.2",
     "gulp-coffeelint": "^0.6.0",
-    "gulp-mocha": "^2.1.0",
+    "gulp-mocha": "^3.0.1",
     "gulp-notify": "^2.2.0",
-    "gulp-plumber": "^1.0.1",
+    "gulp-plumber": "^1.1.0",
     "karma-chai": "^0.1.0",
-    "karma-chrome-launcher": "^0.2.3",
-    "karma-coffee-preprocessor": "^0.3.0",
-    "karma-firefox-launcher": "^0.1.6",
-    "karma-mocha": "^0.2.0",
-    "karma-phantomjs-launcher": "^1.0.0",
-    "mocha": "^2.2.5",
-    "npm-check-updates": "^2.6.3",
-    "phantomjs-prebuilt": "^2.1.7",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-coffee-preprocessor": "^1.0.1",
+    "karma-firefox-launcher": "^1.0.0",
+    "karma-mocha": "^1.2.0",
+    "karma-phantomjs-launcher": "^1.0.2",
+    "mocha": "^3.1.0",
+    "npm-check-updates": "^2.8.0",
+    "phantomjs-prebuilt": "^2.1.12",
     "q": "^1.4.1",
-    "sinon": "^1.14.1"
+    "sinon": "^1.17.6"
   }
 }
