@@ -1,9 +1,6 @@
 language: node_js
-sudo: false
 node_js:
-  - "5"
-  - "4"
-  - "iojs"
+  - 9
 compiler: clang-3.6
 env:
   - CXX=clang-3.6
