@@ -20,16 +20,19 @@ plugin = inject [
           optionsToPass = merge defaultOptions, options
           if optionsToPass.configFile
             optionsToPass.configFile = path.resolve optionsToPass.configFile
-          runner.run optionsToPass, (exitCode) =>
-            if not exitCode and process.env.testing
-              @emit("debug-fin")
-            if exitCode
-              cb new gutil.PluginError(
-                "gulp-karma-runner.runner",
-                "Failed Unit Tests!"
-              )
-            else
-              cb()
+          try
+            runner.run optionsToPass, (exitCode) =>
+              if not exitCode and process.env.testing
+                @emit("debug-fin")
+              if exitCode
+                cb new gutil.PluginError(
+                  "gulp-karma-runner.runner",
+                  "Failed Unit Tests!"
+                )
+              else
+                cb()
+          catch err
+            cb new gutil.PluginError("gulp-karma-runner.runner", err)
       )
 ], (
   "runner": require("karma").runner,
