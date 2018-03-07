@@ -2,7 +2,10 @@ language: node_js
 node_js:
   - 9
 
-cache: yarn
+cache:
+  yarn: true
+  directories:
+    - node_modules
 
 before_deploy:
   - git config --global user.email "test@example.com"
