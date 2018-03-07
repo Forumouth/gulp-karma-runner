@@ -4,7 +4,7 @@
   describe('Server Binary Test', () => {
     const config = req('./fixtures/karma_single.conf.js');
     it('Should run tests thru process spawn', function spawnTest(done) {
-      this.timeout(3000);
+      this.timeout(30000);
       const pc = spawn('node', [req.resolve('../bin/server.js')], {
         stdio: ['pipe', 'inherit', 'pipe'],
       });
