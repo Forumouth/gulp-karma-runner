@@ -11,7 +11,7 @@
     });
     it('Should run tests thru process spawn', function spawnTest(done) {
       this.timeout(3000);
-      const pc = spawn('bin/server.js', [], {
+      const pc = spawn(req.resolve('../bin/server.js'), [], {
         stdio: ['pipe', 'inherit', 'pipe'],
       });
       const err = [];
