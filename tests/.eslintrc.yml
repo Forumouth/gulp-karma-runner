@@ -1,0 +1,10 @@
+rules:
+  no-unused-expressions: warn
+
+globals:
+  beforeEach: false
+  afterEach: false
+  before: false
+  after: false
+  it: false
+  describe: false
