@@ -2,9 +2,12 @@
   const { spawn } = req('child_process');
 
   describe('Server Binary Test', () => {
-    const config = req('./fixtures/single.conf.js');
+    let config;
     before(() => {
-      config.files = config.files.concat(req('./fixtures/index.js'));
+      delete req.cache[req.resolve('./fixtures/single.conf.js')];
+      config = req('./fixtures/single.conf.js');
+      const fixtures = req('./fixtures/index.js');
+      config.files = config.files.concat(fixtures.src, fixtures.specSuccess);
     });
     it('Should run tests thru process spawn', function (done) {
       this.timeout(10000);
