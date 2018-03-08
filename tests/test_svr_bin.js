@@ -2,23 +2,19 @@
   const { spawn } = req('child_process');
 
   describe('Server Binary Test', () => {
-    const config = req('./fixtures/karma_single.conf.js');
+    const config = req('./fixtures/single.conf.js');
     before(() => {
-      config.files = config.files.concat(
-        req.resolve('./fixtures/src/add.js'),
-        req.resolve('./fixtures/src/sub.js'),
-        req.resolve('./fixtures/tests/spec.js')
-      );
+      config.files = config.files.concat(req('./fixtures/index.js'));
     });
-    it('Should run tests thru process spawn', function spawnTest(done) {
-      this.timeout(30000);
+    it('Should run tests thru process spawn', function (done) {
+      this.timeout(10000);
       const pc = spawn('node', [req.resolve('../bin/server.js')], {
         stdio: ['pipe', 'inherit', 'pipe'],
       });
       const err = [];
       pc.stderr.on('data', (data) => { err.push(data); });
       pc.on('error', done);
-      pc.on('close', (code, signal) => {
+      pc.on('exit', (code, signal) => {
         if (code || (signal && signal.length) || err.length) {
           done(new Error(
             `Karma server exited with Code: ${code}, Signal: ${signal}

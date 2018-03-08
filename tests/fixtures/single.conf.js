@@ -11,6 +11,7 @@
     port: 9876,
     preprocessors: {
       'tests/**/*.js': ['babel'],
+      'src/**/*.js': ['babel'],
     },
     babelPreprocessor: {
       options: { presets: ['@babel/preset-env'], sourceMap: 'inline' },
