@@ -3,6 +3,13 @@
 
   describe('Server Binary Test', () => {
     const config = req('./fixtures/karma_single.conf.js');
+    before(() => {
+      config.files = config.files.concat(
+        req.resolve('./fixtures/src/add.js'),
+        req.resolve('./fixtures/src/sub.js'),
+        req.resolve('./fixtures/tests/spec.js')
+      );
+    });
     it('Should run tests thru process spawn', function spawnTest(done) {
       this.timeout(30000);
       const pc = spawn('node', [req.resolve('../bin/server.js')], {

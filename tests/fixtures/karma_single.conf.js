@@ -1,4 +1,4 @@
-((req) => {
+(() => {
   module.exports = {
     basePath: './',
     quiet: false,
@@ -24,10 +24,6 @@
       'karma-phantomjs-launcher',
       'karma-babel-preprocessor',
     ],
-    files: [
-      req.resolve('./src/add.js'),
-      req.resolve('./src/sub.js'),
-      req.resolve('./tests/spec.js'),
-    ],
+    files: [],
   };
-})(require);
+})();
