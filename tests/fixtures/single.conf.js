@@ -20,8 +20,7 @@
     },
     browsers: ['PhantomJS'],
     plugins: [
-      'karma-mocha',
-      'karma-chai',
+      'karma-mocha', 'karma-chai',
       'karma-phantomjs-launcher',
       'karma-babel-preprocessor',
     ],
