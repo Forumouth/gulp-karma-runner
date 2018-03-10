@@ -12,7 +12,7 @@
     it('Should run tests thru process spawn', function (done) {
       this.timeout(10000);
       const pc = spawn('node', [req.resolve('../bin/server.js')], {
-        stdio: ['pipe', 'inherit', 'pipe'],
+        stdio: ['pipe', 'inherit', 'pipe', 'ipc'],
       });
       const err = [];
       pc.stderr.on('data', (data) => { err.push(data); });

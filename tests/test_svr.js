@@ -89,25 +89,25 @@
     configFile: './fixtures/single_quiet.conf.js',
   }, {
     name: 'karma.server.quiet.normal.config.success',
-    configFile: './fixtures/specified_quiet.conf.js',
+    configFile: './fixtures/specified_single_quiet.conf.js',
   }, {
     name: 'karma.server.quiet.normal.failure',
     configFile: './fixtures/single_quiet.conf.js',
   }, {
     name: 'karma.server.quiet.normal.config.failure',
-    configFile: './fixtures/specified_quiet.conf.js',
+    configFile: './fixtures/specified_single_quiet.conf.js',
   });
   generate('Server Plugin without quiet mode', {
     name: 'karma.server.normal.success',
     configFile: './fixtures/single.conf.js',
   }, {
     name: 'karma.server.normal.config.success',
-    configFile: './fixtures/specified.conf.js',
+    configFile: './fixtures/specified_single.conf.js',
   }, {
     name: 'karma.server.normal.failure',
     configFile: './fixtures/single.conf.js',
   }, {
     name: 'karma.server.normal.config.failure',
-    configFile: './fixtures/specified.conf.js',
+    configFile: './fixtures/specified_single.conf.js',
   });
 })(require);
