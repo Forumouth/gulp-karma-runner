@@ -2,6 +2,10 @@
   const gulp = req('gulp');
   const plugin = req('../');
   const { stopper: karmaStopper } = req('karma');
+  const stream = req('stream');
+  const File = req('vinyl');
+  const es = req('event-stream');
+  const { expect } = req('chai');
 
   describe('Karma runner test', () => {
     const quietConfig = req('./fixtures/quiet.conf.js');
@@ -88,9 +92,27 @@
       );
     });
     afterEach(() => {
+      karmaStopper.stop(quietConfig, () => {});
       gulp.removeAllListeners('error');
       gulp.removeAllListeners('karma.server.browsers_ready');
-      karmaStopper.stop(quietConfig, () => {});
+    });
+    describe('Stream restriction check', () => {
+      it('Throws stream not supported error', (done) => {
+        const file = new File({
+          path: 'test.js',
+          contents: new stream.Readable({ objectMode: true })
+            .wrap(es.readArray(['test'])),
+        });
+        const runner = plugin.runner(req('./fixtures/single_quiet.conf.js'));
+        runner.once(
+          'end', () => { done(new Error('Should throw an error')); }
+        );
+        runner.once('error', (err) => {
+          expect(err.message).to.be.equal('Stream is not supported.');
+          done();
+        });
+        runner.write(file);
+      });
     });
     describe('Object config is directly passed', () => {
       check(

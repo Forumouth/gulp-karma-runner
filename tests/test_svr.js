@@ -1,6 +1,10 @@
 ((req) => {
+  const stream = req('stream');
   const plugin = req('../');
   const gulp = req('gulp');
+  const File = req('vinyl');
+  const es = req('event-stream');
+  const { expect } = req('chai');
 
   // args: Test tasks. The order is:
   // 1: success config with referencing configuration
@@ -80,10 +84,26 @@
             }))
         );
       });
-      afterEach(() => { gulp.removeAllListeners('error'); });
+      afterEach(() => gulp.removeAllListeners('error'));
       runCheck(args[1].name, args[0].name, args[3].name, args[2].name);
     });
   };
+  describe('Stream restriction check', () => {
+    it('Throws stream not supported error', (done) => {
+      const file = new File({
+        path: 'test.js',
+        contents: new stream.Readable({ objectMode: true })
+          .wrap(es.readArray(['test'])),
+      });
+      const svr = plugin.server(req('./fixtures/single_quiet.conf.js'));
+      svr.once('end', () => { done(new Error('Should throw an error')); });
+      svr.once('error', (err) => {
+        expect(err.message).to.be.equal('Stream is not supported.');
+        done();
+      });
+      svr.write(file);
+    });
+  });
   generate('Server Plugin with quiet mode', {
     name: 'karma.server.quiet.normal.success',
     configFile: './fixtures/single_quiet.conf.js',
