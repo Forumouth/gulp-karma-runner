@@ -1,0 +1,12 @@
+rules:
+  no-unused-expressions: warn
+  func-names:
+    - off
+
+globals:
+  beforeEach: false
+  afterEach: false
+  before: false
+  after: false
+  it: false
+  describe: false

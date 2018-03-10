@@ -1,0 +1,29 @@
+extends: airbnb-base
+parserOptions:
+  ecmaVersion: 6
+  sourceType: module
+env:
+  node: true
+  es6: true
+rules:
+  comma-dangle:
+    - error
+    - arrays: always-multiline
+      objects: always-multiline
+      imports: only-multiline
+      exports: only-multiline
+      functions: ignore
+  max-len:
+    - "error"
+    - 80
+  import/no-extraneous-dependencies:
+    - "error"
+    - devDependencies: true
+      optionalDependencies: true
+      peerDependencies: true
+  function-paren-newline:
+    - "error"
+    - "consistent"
+  object-curly-newline:
+    - "error"
+    - "consistent": true
