@@ -13,7 +13,7 @@ before_script:
   - ./cc-test-reporter before-build
 
 after_success:
-   - ./cc-test-reporter after-build --exit-code $EXIT_CODE
+   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 
 deploy:
   - provider: npm
