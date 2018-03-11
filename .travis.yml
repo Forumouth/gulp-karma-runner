@@ -7,32 +7,15 @@ cache:
   directories:
     - node_modules
 
-before_deploy:
-  - git config --global user.email "test@example.com"
-  - git config --global user.name "Mr. Travis CI"
-  - git add .
-  - git commit -m "Commit to make tarball"
-  - git archive --format=tar.gz HEAD > ./${TRAVIS_TAG}-compiled.tar.gz
+before_script:
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
+
+after_success:
+   - ./cc-test-reporter after-build --exit-code $EXIT_CODE
 
 deploy:
-  - provider: releases
-    api_key:
-      secure: >-
-        H+lLuiNPbb+cQp9teMchFNR+wQXCc5734vH/2bJkeVSJZlb3Z5ru2pNCXNKWeH0iJ6tknk
-        Moj9Cv6b8xCTf5/O53kGb4u0CquRcLfev7sFK6tCR0pVSH/HvKmbT5j0W4DXWNRRu6ts+w
-        CbrebWSgAvBuZeh8Ktkf06VCVrIsEyTFXuls7IyXSPZ2GQXIxAlyEGN4ZYKMfg9Ij+WJcR
-        N3U+YXdwS/5X4oQ2K6ipvdeVdSdQMy0IdfEY359x6pdS1eAPaZOiDxtyAkj6d3x46K8ydI
-        apTfeb/6dli5BzvuFB0xV6Lj57sOW4pi6C2FmFNVaxoWCfNrHxcG0DJt/Z7gI+QlnxZlw9
-        jgxfbB7xMfF9+//fRRawwX9Wlpqt1F0MBu/pFOemNnn82lDJqIreYcamIZGDK7MGpqEfOO
-        I5PG2q5YxRIhCXSegU5OyMy+sbuYNq+ZTnSe6U5QV6mfftqMbbqZjAOVZfqyQSjBKnZVET
-        ucJz9najSB7FBT8puDi3U1oPo7DJw6IRNGm1A3AZ46CFN0Kse5exzDibBquuleX5YQiU1D
-        gH35pSPiXEqNpAeXHxd4iPX/BtLTGeN8VNsWHGXW9EA8KClDNuF9eRMD4GuWf79uohUPCn
-        yAM1JUw1t2Iu4BFmljg7/RoujuqSi3O+WaPUXsqeP+lfHBAEkAjBA=
-    file: "${TRAVIS_TAG}-compiled.tar.gz"
-    skip_cleanup: true
-    on:
-      tags: true
-      repo: Forumouth/gulp-karma-runner
   - provider: npm
     email: hiroaki@hysoftware.net
     skip_cleanup: true
