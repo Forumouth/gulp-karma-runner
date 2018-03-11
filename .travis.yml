@@ -15,6 +15,11 @@ before_script:
 after_success:
    - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 
+before_deploy:
+  - "echo ${TRAVIS_TAG}"
+  - "perl -pe \"s/0.0.0/${TRAVIS_TAG}/\" package.json > package.json.new"
+  - "mv package.json.new package.json"
+
 deploy:
   - provider: npm
     email: hiroaki@hysoftware.net
