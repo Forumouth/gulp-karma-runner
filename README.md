@@ -1,5 +1,7 @@
 # Gulp plugin for karma
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/Forumouth/gulp-karma-runner.svg)](https://greenkeeper.io/)
+
 [![CIImg]][CILink] [![CovImg]][CovLink] [![MntImg]][MntLink]
 
 [![NPMImg]][NPMLink]
