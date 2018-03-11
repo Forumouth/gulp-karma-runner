@@ -1,8 +1,17 @@
 # Gulp plugin for karma
 
-[![Build Status](https://travis-ci.org/Forumouth/gulp-karma-runner.svg?branch=master)](https://travis-ci.org/Forumouth/gulp-karma-runner)
+[![CIImg]][CILink] [![CovImg]][CovLink] [![MntImg]][MntLink]
 
-[![NPM](https://nodei.co/npm/gulp-karma-runner.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/gulp-karma-runner/)
+[![NPMImg]][NPMLink]
+
+[CIImg]: https://travis-ci.org/Forumouth/gulp-karma-runner.svg?branch=master
+[CILink]: https://travis-ci.org/Forumouth/gulp-karma-runner
+[NPMImg]: https://nodei.co/npm/gulp-karma-runner.png?downloads=true&downloadRank=true&stars=true
+[NPMLink]: https://nodei.co/npm/gulp-karma-runner/
+[MntImg]: https://api.codeclimate.com/v1/badges/9f62776a481df3001f7a/maintainability
+[MntLink]: https://codeclimate.com/github/Forumouth/gulp-karma-runner/maintainability
+[CovImg]: https://api.codeclimate.com/v1/badges/9f62776a481df3001f7a/test_coverage
+[CovLink]: https://codeclimate.com/github/Forumouth/gulp-karma-runner/test_coverage
 
 ## What this?
 This is a gulp plugin for [karma](http://karma-runner.github.io/)
