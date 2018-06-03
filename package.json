@@ -41,7 +41,7 @@
     "lodash": "^4.17.10",
     "mocha": "^5.1.1",
     "npm-check-updates": "^2.14.2",
-    "nyc": "^11.7.1",
+    "nyc": "^12.0.1",
     "phantomjs-prebuilt": "^2.1.16",
     "vinyl": "^2.1.0"
   },
