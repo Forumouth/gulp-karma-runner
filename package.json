@@ -21,7 +21,7 @@
     "test": "npm run lint && npm run nyc"
   },
   "dependencies": {
-    "karma": "^2.0.4",
+    "karma": "^3.0.0",
     "plugin-error": "^1.0.1"
   },
   "devDependencies": {
