@@ -9,16 +9,13 @@ cache:
 
 before_install:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-  - npm i -g  greenkeeper-lockfile@1
 
 before_script:
   - chmod +x ./cc-test-reporter
-  - greenkeeper-lockfile-update
   - ./cc-test-reporter before-build
 
 after_success:
    - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
-   - greenkeeper-lockfile-upload
 
 before_deploy:
   - "echo ${TRAVIS_TAG}"
