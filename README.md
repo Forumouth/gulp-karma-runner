@@ -1,13 +1,11 @@
 # Gulp plugin for karma
 
-[![CIImg]][CILink] [![GrkeepImg]][GrkeepLink] [![CovImg]][CovLink] [![MntImg]][MntLink]
+[![CIImg]][CILink] [![CovImg]][CovLink] [![MntImg]][MntLink]
 
 [![NPMImg]][NPMLink]
 
 [CIImg]: https://travis-ci.org/Forumouth/gulp-karma-runner.svg?branch=master
 [CILink]: https://travis-ci.org/Forumouth/gulp-karma-runner
-[GrkeepImg]: https://badges.greenkeeper.io/Forumouth/gulp-karma-runner.svg
-[GrkeepLink]: https://greenkeeper.io/
 [NPMImg]: https://nodei.co/npm/gulp-karma-runner.png?downloads=true&downloadRank=true&stars=true
 [NPMLink]: https://nodei.co/npm/gulp-karma-runner/
 [MntImg]: https://api.codeclimate.com/v1/badges/9f62776a481df3001f7a/maintainability
