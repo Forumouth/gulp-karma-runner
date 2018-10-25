@@ -8,5 +8,8 @@
   },
   "vulnerabilityAlerts": {
     "enabled": true
-  }
+  },
+  "assignees": ["hiroaki-yamamoto"],
+  "reviewers": ["hiroaki-yamamoto"],
+  "groupName": "group"
 }
