@@ -41,7 +41,7 @@
     "karma-phantomjs-launcher": "^1.0.4",
     "lodash": "^4.17.11",
     "mocha": "^6.0.0",
-    "npm-check-updates": "^2.14.2",
+    "npm-check-updates": "^3.0.0",
     "nyc": "^13.0.1",
     "phantomjs-prebuilt": "^2.1.16",
     "vinyl": "^2.2.0"
