@@ -15,8 +15,8 @@
     },
     babelPreprocessor: {
       options: { presets: ['@babel/preset-env'], sourceMap: 'inline' },
-      filename: file => file.originalPath.replace(/\.js$/, '.es5.js'),
-      sourceFileName: file => file.originalPath,
+      filename: (file) => file.originalPath.replace(/\.js$/, '.es5.js'),
+      sourceFileName: (file) => file.originalPath,
     },
     browsers: ['PhantomJS'],
     plugins: [
